@@ -1,4 +1,4 @@
-package com.cursoaristi.myapplication.ui.notifications
+package com.cursoaristi.myapplication.ui.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.srodenas.example_with_catalogs.databinding.FragmentNotificationsBinding
+import com.example.srodenas.example_with_catalogs.databinding.FragmentAlertasBinding
 
-class NotificationsFragment : Fragment() {
+class AlertasFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentAlertasBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val dashboardViewModel =
+            ViewModelProvider(this).get(AlertasViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentAlertasBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textDashboard
+        dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
