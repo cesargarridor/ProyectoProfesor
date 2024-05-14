@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.cursoaristi.myapplication.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.cursoaristi.myapplication.ui.home.PerfilFragment"
+        tools:layout="@layout/fragment_perfil" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
