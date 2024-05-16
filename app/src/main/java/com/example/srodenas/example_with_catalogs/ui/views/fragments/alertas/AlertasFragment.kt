@@ -6,37 +6,37 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.srodenas.example_with_catalogs.databinding.FragmentAlertasBinding
+import com.example.srodenas.example_with_catalogs.ui.viewmodel.alertas.AlertaViewModel
 
 class AlertasFragment : Fragment() {
-
-    private var _binding: FragmentAlertasBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private var binding : FragmentAlertasBinding ? = null
+    private val viewModelAlerts : AlertaViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(AlertasViewModel::class.java)
-
-        _binding = FragmentAlertasBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentAlertasBinding.inflate(inflater, container, false)
+        val root : View = binding!!.root
         return root
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val textView = binding!!.textDashboard
+        viewModelAlerts.text.observe(viewLifecycleOwner, {
+            textView.text = it
+        })
+
+    }
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
     }
 }

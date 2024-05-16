@@ -1,4 +1,4 @@
-package com.example.srodenas.example_with_catalogs.domain.users.models
+package com.example.srodenas.example_with_catalogs.domain.users
 
 import android.content.Context
 import androidx.room.Room
@@ -11,7 +11,7 @@ object UserDataBaseSingleton {
 
     fun init(context: Context) {
         synchronized(this) {
-            if (!::database.isInitialized) {
+            if (!UserDataBaseSingleton::database.isInitialized) {
                 database = Room.databaseBuilder(
                     context.applicationContext,
                     UserDataBase::class.java,
