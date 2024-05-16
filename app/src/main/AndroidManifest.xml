@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Example_with_catalogs"
         tools:targetApi="31">
         <activity
-            android:name=".ui.views.activities.MainActivity"
+            android:name=".ui.views.activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.views.activities.LoginActivity"
+            android:name=".ui.views.activities.MainActivity"
             android:exported="false" >
 
         </activity>

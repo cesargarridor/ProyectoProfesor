@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.example.srodenas.example_with_catalogs.R
 import com.example.srodenas.example_with_catalogs.databinding.FragmentAlertasBinding
 import com.example.srodenas.example_with_catalogs.ui.viewmodel.alertas.AlertaViewModel
 
@@ -20,23 +21,6 @@ class AlertasFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentAlertasBinding.inflate(inflater, container, false)
-        val root : View = binding!!.root
-        return root
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val textView = binding!!.textDashboard
-        viewModelAlerts.text.observe(viewLifecycleOwner, {
-            textView.text = it
-        })
-
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
+        return inflater.inflate(R.layout.fragment_alertas, container, false)
     }
 }

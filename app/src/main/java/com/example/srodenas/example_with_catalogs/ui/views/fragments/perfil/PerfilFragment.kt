@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.srodenas.example_with_catalogs.databinding.FragmentPerfilBinding
@@ -12,10 +11,8 @@ import com.example.srodenas.example_with_catalogs.ui.viewmodel.perfil.PerfilView
 
 class PerfilFragment : Fragment() {
 
+    private lateinit var viewModel: PerfilViewModel
     private var _binding: FragmentPerfilBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -23,17 +20,26 @@ class PerfilFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(PerfilViewModel::class.java)
-
         _binding = FragmentPerfilBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(PerfilViewModel::class.java)
+
+        // esto sirve para los datos del usuario desde el ViewModel
+        viewModel.userData.observe(viewLifecycleOwner) { user ->
+            // Esto es para mostrar los datos del usuario en la interfaz de usuario
+            if (user != null) {
+                binding.textViewName.text = user.displayName
+            }
+            if (user != null) {
+                binding.textViewEmail.text = user.email
+            }
+
         }
-        return root
     }
 
     override fun onDestroyView() {
