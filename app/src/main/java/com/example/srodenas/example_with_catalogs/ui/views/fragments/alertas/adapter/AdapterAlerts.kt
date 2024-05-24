@@ -6,30 +6,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.srodenas.example_with_catalogs.R
 import com.example.srodenas.example_with_catalogs.domain.alerts.models.Alert
 
-class AdapterAlerts   (
-    var listAlerts : MutableList<Alert>,
+class AdapterAlerts(
+    var listAlerts: MutableList<Alert>,
     val onDelete: (Int) -> Unit,
     val onDetails: (Int) -> Unit
-): RecyclerView.Adapter<ViewHAlert>(){
-
-
+) : RecyclerView.Adapter<ViewHAlert>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHAlert {
-        val layoutInflater = LayoutInflater.from(parent.context)//objeto para crear la vista.
-        val layoutItemAlert = R.layout.item_alert  //accedo al xml del item a crear.
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val layoutItemAlert = R.layout.item_alert
         return ViewHAlert(
             layoutInflater.inflate(layoutItemAlert, parent, false),
-            onDelete, onDetails
+            onDelete,
+            onDetails
         )
     }
 
-
-
     override fun getItemCount(): Int = listAlerts.size
 
-
-
     override fun onBindViewHolder(holder: ViewHAlert, position: Int) {
-        holder.renderize(listAlerts.get(position), position)  //renderizamos la view.
+        holder.renderize(listAlerts[position], position)
     }
 }

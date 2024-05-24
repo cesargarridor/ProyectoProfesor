@@ -33,10 +33,10 @@ class PerfilFragment : Fragment() {
         viewModel.userData.observe(viewLifecycleOwner) { user ->
             // Esto es para mostrar los datos del usuario en la interfaz de usuario
             if (user != null) {
-                binding.textViewName.text = user.displayName
+                binding.textViewName2.text = user.displayName
             }
             if (user != null) {
-                binding.textViewEmail.text = user.email
+                binding.textViewEmail2.text = user.email
             }
 
         }

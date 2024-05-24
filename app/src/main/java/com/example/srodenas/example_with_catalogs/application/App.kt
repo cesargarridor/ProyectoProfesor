@@ -8,7 +8,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         UserDataBaseSingleton.init(this)
-        FirebaseApp.initializeApp(this)
+       // FirebaseApp.initializeApp(this)
 
     }
 }

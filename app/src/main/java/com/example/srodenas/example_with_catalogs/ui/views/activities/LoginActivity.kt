@@ -1,11 +1,9 @@
 package com.example.srodenas.example_with_catalogs.ui.views.activities
 
 import android.content.Intent
-import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.srodenas.example_with_catalogs.databinding.ActivityLoginBinding
 import com.example.srodenas.example_with_catalogs.domain.users.models.User

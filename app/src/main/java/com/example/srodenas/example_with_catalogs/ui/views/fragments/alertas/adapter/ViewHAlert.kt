@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.srodenas.example_with_catalogs.databinding.ItemAlertBinding
 import com.example.srodenas.example_with_catalogs.domain.alerts.models.Alert
-import com.example.srodenas.example_with_catalogs.domain.users.models.User
+
 
 class ViewHAlert (view: View,
                   val onDelete: (Int) -> Unit,
@@ -18,7 +18,7 @@ class ViewHAlert (view: View,
     }
 
 
-    fun renderize(alert: Alert, position:Int){
+    fun renderize(user: Alert, position:Int){
         /*
         Debemos de setear los campos
          */
