@@ -30,11 +30,16 @@ class UserViewModel (): ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val user = useCaseLogin.login(email, password)
 
+            if (user != null) {
+                repository.setLoggedUser(user)  // Establecer el usuario logueado en el repositorio
+            }
+
             withContext(Dispatchers.Main) {
                 login.postValue(user)
             }
         }
     }
+
 
 
 
@@ -101,6 +106,9 @@ class UserViewModel (): ViewModel() {
         }
     }
 }
+
+
+
 
 
 

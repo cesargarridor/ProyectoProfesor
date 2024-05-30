@@ -29,17 +29,14 @@ class PerfilFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(PerfilViewModel::class.java)
 
-        // esto sirve para los datos del usuario desde el ViewModel
         viewModel.userData.observe(viewLifecycleOwner) { user ->
-            // Esto es para mostrar los datos del usuario en la interfaz de usuario
             if (user != null) {
-                binding.textViewName2.text = user.displayName
-            }
-            if (user != null) {
+                binding.textViewName2.text = user.name
                 binding.textViewEmail2.text = user.email
             }
-
         }
+
+        viewModel.loadUserData()
     }
 
     override fun onDestroyView() {

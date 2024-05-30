@@ -11,7 +11,17 @@ class Repository  private constructor(private val userDao : UserDao){
             Repository(UserDataBaseSingleton.userDao)
         }
     }
+    val repo = this
 
+    private var loggedUser: User? = null
+
+    fun setLoggedUser(user: User) {
+        loggedUser = user
+    }
+
+    fun getLoggedUser(): User? {
+        return loggedUser
+    }
     suspend fun isLoginEntity(email: String, passord: String): User?{
         val posUser : UserEntity = userDao.login(email, passord)
         var user : User ? = null
