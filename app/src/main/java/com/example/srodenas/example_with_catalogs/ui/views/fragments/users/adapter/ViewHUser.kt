@@ -5,26 +5,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.srodenas.example_with_catalogs.databinding.ItemUserBinding
 import com.example.srodenas.example_with_catalogs.domain.users.models.User
 
-class ViewHUser (view: View,
-                 val onDetails: (Int) -> Unit
+class ViewHUser(view: View, val onDetails: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
+    private val binding = ItemUserBinding.bind(view)
 
-) : RecyclerView.ViewHolder(view){
+    fun renderize(user: User, position: Int) {
+        binding.txtviewName.text = user.name
+        binding.txtviewPhone.text = user.phone
+        // Set other fields as needed
 
-    lateinit var binding: ItemUserBinding
-    init {
-        binding = ItemUserBinding.bind(view)
-    }
-
-
-    fun renderize(user: User, position:Int){
-        /*
-        Debemos de setear los campos
-         */
-
-
-        binding.btnDetail.setOnClickListener{
+        binding.btnDetail.setOnClickListener {
             onDetails(position)
         }
-
     }
 }

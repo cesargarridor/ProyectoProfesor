@@ -3,7 +3,7 @@ package com.example.srodenas.example_with_catalogs.ui.views.fragments.alerts.ada
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.srodenas.example_with_catalogs.R
+import com.example.srodenas.example_with_catalogs.databinding.ItemAlertBinding
 import com.example.srodenas.example_with_catalogs.domain.alerts.models.Alert
 
 class AdapterAlerts(
@@ -14,12 +14,8 @@ class AdapterAlerts(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHAlert {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val layoutItemAlert = R.layout.item_alert
-        return ViewHAlert(
-            layoutInflater.inflate(layoutItemAlert, parent, false),
-            onDelete,
-            onDetails
-        )
+        val binding = ItemAlertBinding.inflate(layoutInflater, parent, false)
+        return ViewHAlert(binding.root, onDelete, onDetails)
     }
 
     override fun getItemCount(): Int = listAlerts.size

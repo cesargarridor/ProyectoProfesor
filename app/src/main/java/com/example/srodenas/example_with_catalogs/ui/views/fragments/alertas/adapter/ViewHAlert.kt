@@ -1,34 +1,34 @@
 package com.example.srodenas.example_with_catalogs.ui.views.fragments.alerts.adapter
 
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.srodenas.example_with_catalogs.databinding.ItemAlertBinding
 import com.example.srodenas.example_with_catalogs.domain.alerts.models.Alert
 
+class ViewHAlert(
+    view: View,
+    val onDelete: (Int) -> Unit,
+    val onDetails: (Int) -> Unit
+) : RecyclerView.ViewHolder(view) {
 
-class ViewHAlert (view: View,
-                  val onDelete: (Int) -> Unit,
-                  val onDetails: (Int) -> Unit
+    private val binding: ItemAlertBinding = ItemAlertBinding.bind(view)
 
-) : RecyclerView.ViewHolder(view){
+    fun renderize(alert: Alert, position: Int) {
+        with(binding) {
+            txtNameAlert.text = alert.textShort
+            dateAlert.text = alert.alertDate
+            txtDescriptionShort.text = alert.textShort
+            txtDescription.text = alert.message
 
-    lateinit var binding: ItemAlertBinding
-    init {
-        binding = ItemAlertBinding.bind(view)
-    }
+            btnDeleteAlert.setOnClickListener {
+                onDelete(position)
+            }
 
-
-    fun renderize(user: Alert, position:Int){
-        /*
-        Debemos de setear los campos
-         */
-        binding.btnDeleteAlert.setOnClickListener{
-            onDelete(position)
+            btnDescriptionAlert.setOnClickListener {
+                onDetails(position)
+            }
         }
-
-        binding.btnDescriptionAlert.setOnClickListener{
-            onDetails(position)
-        }
-
     }
 }

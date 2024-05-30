@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.srodenas.example_with_catalogs.data.users.database.entities.AlertEntity
 import com.example.srodenas.example_with_catalogs.data.users.database.entities.UserEntity
+import com.example.srodenas.example_with_catalogs.domain.users.models.User
 
 @Dao
 interface UserDao {
@@ -18,6 +19,8 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(vararg user : UserEntity)
 
+    @Query("SELECT * FROM tblusers")
+    suspend fun getAllUsers(): List<UserEntity>
 }
 
 @Dao

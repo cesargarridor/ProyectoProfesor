@@ -33,5 +33,7 @@ class Repository  private constructor(private val userDao : UserDao){
             return false
 
     }
-
+    suspend fun getAllUsers(): List<UserEntity> {
+        return userDao.getAllUsers()
+    }
 }
