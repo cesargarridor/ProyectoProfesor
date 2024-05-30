@@ -32,7 +32,7 @@ class PerfilFragment : Fragment() {
         viewModel.userData.observe(viewLifecycleOwner) { user ->
             if (user != null) {
                 binding.textViewName2.text = user.name
-                binding.textViewEmail2.text = user.email
+                binding.textViewEmail2.text = user.passw
             }
         }
 
