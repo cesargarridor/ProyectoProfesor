@@ -51,17 +51,19 @@ class UserViewModel (): ViewModel() {
     }
     fun showUsers() {
         viewModelScope.launch(Dispatchers.IO) {
-            var data: MutableList<User>? = null
+            val data = repository.getAllUsers().map { userEntity ->
+                User(
+                    id = userEntity.id,
+                    name = userEntity.name,
+                    email = userEntity.email,
+                    passw = userEntity.password,
+                    phone = userEntity.phone,
+                    imagen = userEntity.imag
+                )
+            }.toMutableList()
 
-            if (ListUsers.list.users.isEmpty())
-            //todo    data = getAllUsersDatabaseUseCase()  //recupera todos los usuarios de la BBDD
-            else
-                data = ListUsers.list.users
-
-            data.let {
-                withContext(Dispatchers.Main) {
-                    usersLiveData.value = it
-                }
+            withContext(Dispatchers.Main) {
+                usersLiveData.value = data
             }
         }
     }
