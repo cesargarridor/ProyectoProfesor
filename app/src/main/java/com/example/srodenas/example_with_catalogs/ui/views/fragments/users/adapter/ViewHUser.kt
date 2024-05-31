@@ -11,7 +11,7 @@ class ViewHUser(view: View, val onDetails: (Int) -> Unit) : RecyclerView.ViewHol
     fun renderize(user: User, position: Int) {
         binding.txtviewName.text = user.name
         binding.txtviewPhone.text = user.phone
-        // Set other fields as needed
+        binding.txtViewEmail.text = user.email
 
         binding.btnDetail.setOnClickListener {
             onDetails(position)

@@ -32,17 +32,14 @@ class UsuariosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Inicializar el ViewModel
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-        // Configurar el RecyclerView
         binding.myRecyclerViewUsers.layoutManager = LinearLayoutManager(context)
         adapterUser = AdapterUser(mutableListOf()) { position ->
-            // Acción al hacer clic en detalles
+
         }
         binding.myRecyclerViewUsers.adapter = adapterUser
 
-        // Observar cambios en la lista de usuarios
         userViewModel.usersLiveData.observe(viewLifecycleOwner, Observer { users ->
             users?.let {
                 adapterUser.listUsers = it
@@ -50,7 +47,6 @@ class UsuariosFragment : Fragment() {
             }
         })
 
-        // Cargar usuarios
         userViewModel.showUsers()
     }
 
