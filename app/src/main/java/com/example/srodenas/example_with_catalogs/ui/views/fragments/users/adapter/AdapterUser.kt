@@ -1,5 +1,7 @@
 package com.example.srodenas.example_with_catalogs.ui.views.fragments.users.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,9 +35,23 @@ class AdapterUser(
             binding.txtviewPhone.text = user.phone
             binding.txtViewEmail.text = user.email
 
-            binding.btnDetail.setOnClickListener {
-                onDetails(position)
+            binding.btnCall.setOnClickListener {
+                val callIntent = Intent(Intent.ACTION_DIAL).apply {
+                    data = Uri.parse("tel:${user.phone}")
+                }
+                itemView.context.startActivity(callIntent)
             }
+
+            binding.btnEmail.setOnClickListener {
+                val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:${user.email}")
+                    putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
+                    putExtra(Intent.EXTRA_TEXT, "Body Here")
+                }
+                itemView.context.startActivity(emailIntent)
+            }
+
+
         }
     }
 }

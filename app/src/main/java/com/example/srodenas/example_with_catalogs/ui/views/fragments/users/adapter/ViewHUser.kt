@@ -13,8 +13,6 @@ class ViewHUser(view: View, val onDetails: (Int) -> Unit) : RecyclerView.ViewHol
         binding.txtviewPhone.text = user.phone
         binding.txtViewEmail.text = user.email
 
-        binding.btnDetail.setOnClickListener {
-            onDetails(position)
-        }
+
     }
 }
