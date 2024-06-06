@@ -1,10 +1,7 @@
 package com.example.srodenas.example_with_catalogs.ui.views.fragments.alertas
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,12 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.srodenas.example_with_catalogs.R
 import com.example.srodenas.example_with_catalogs.databinding.FragmentAlertasBinding
 import com.example.srodenas.example_with_catalogs.domain.alerts.models.Alert
-import com.example.srodenas.example_with_catalogs.domain.users.models.User
 import com.example.srodenas.example_with_catalogs.ui.viewmodel.alertas.AlertaViewModel
 import com.example.srodenas.example_with_catalogs.ui.views.fragments.alertas.dialogs.AddAlert
 import com.example.srodenas.example_with_catalogs.ui.views.fragments.alertas.dialogs.EditAlert
 import com.example.srodenas.example_with_catalogs.ui.views.fragments.alerts.adapter.AdapterAlerts
-import com.example.srodenas.example_with_catalogs.ui.views.fragments.users.dialogs.DialogRegisterUser
 
 class AlertasFragment : Fragment() {
     private var _binding: FragmentAlertasBinding? = null
@@ -32,6 +27,7 @@ class AlertasFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAlertasBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -39,6 +35,21 @@ class AlertasFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initEvent()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_logout -> {
+                requireActivity().finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun initRecyclerView() {

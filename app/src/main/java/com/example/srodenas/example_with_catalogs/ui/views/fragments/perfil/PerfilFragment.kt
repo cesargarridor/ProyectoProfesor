@@ -1,11 +1,10 @@
 package com.cursoaristi.myapplication.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.srodenas.example_with_catalogs.R
 import com.example.srodenas.example_with_catalogs.databinding.FragmentPerfilBinding
 import com.example.srodenas.example_with_catalogs.ui.viewmodel.perfil.PerfilViewModel
 
@@ -21,6 +20,7 @@ class PerfilFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPerfilBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -37,6 +37,21 @@ class PerfilFragment : Fragment() {
         }
 
         viewModel.loadUserData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_logout -> {
+                requireActivity().finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onDestroyView() {
