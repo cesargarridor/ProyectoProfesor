@@ -1,4 +1,4 @@
-package com.cursoaristi.myapplication.ui.dashboard
+package com.example.srodenas.example_with_catalogs.ui.views.fragments.alertas
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +16,7 @@ import com.example.srodenas.example_with_catalogs.domain.alerts.models.Alert
 import com.example.srodenas.example_with_catalogs.domain.users.models.User
 import com.example.srodenas.example_with_catalogs.ui.viewmodel.alertas.AlertaViewModel
 import com.example.srodenas.example_with_catalogs.ui.views.fragments.alertas.dialogs.AddAlert
+import com.example.srodenas.example_with_catalogs.ui.views.fragments.alertas.dialogs.EditAlert
 import com.example.srodenas.example_with_catalogs.ui.views.fragments.alerts.adapter.AdapterAlerts
 import com.example.srodenas.example_with_catalogs.ui.views.fragments.users.dialogs.DialogRegisterUser
 
@@ -41,11 +42,17 @@ class AlertasFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapterAlerts = AdapterAlerts(ArrayList(), onDelete = {
-            deleteAlert(it)
-        }, onDetails = {
-            // Handle details action here
-        })
+        adapterAlerts = AdapterAlerts(
+            ArrayList(),
+            onDelete = {
+                deleteAlert(it)
+            },
+            onDetails = {
+            },
+            onEdit = { alert, position ->
+                editAlert(alert, position)
+            }
+        )
         binding.myRecyclerViewAlerts.layoutManager = LinearLayoutManager(requireContext())
         binding.myRecyclerViewAlerts.adapter = adapterAlerts
     }
@@ -64,20 +71,30 @@ class AlertasFragment : Fragment() {
             adapterAlerts.notifyDataSetChanged()
         })
     }
+
     private fun okOnAddAlert(alert: Alert) {
         val newAlert = Alert(
-            userId = 0, // Ajusta este valor según sea necesario
-            textShort = alert.textShort, // Utiliza el campo 'name' para 'textShort'
-            message = alert.message, // Utiliza el campo 'detailedDescription' para 'message'
-            alertDate = alert.alertDate // Utiliza el campo 'date' para 'alertDate'
+            userId = 0,
+            textShort = alert.textShort,
+            message = alert.message,
+            alertDate = alert.alertDate
         )
         viewModelAlerts.addAlert(newAlert)
         Toast.makeText(requireContext(), "Alerta agregada correctamente", Toast.LENGTH_LONG).show()
     }
 
+    private fun editAlert(alert: Alert, position: Int) {
+        val dialog = EditAlert(alert) { updatedAlert ->
+            viewModelAlerts.updateAlert(position, updatedAlert)
+            Toast.makeText(requireContext(), "Alerta actualizada correctamente", Toast.LENGTH_LONG).show()
+        }
+        dialog.show(requireActivity().supportFragmentManager, "Editar Alerta")
+    }
+
     private fun deleteAlert(position: Int) {
         viewModelAlerts.deleteAlert(position)
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

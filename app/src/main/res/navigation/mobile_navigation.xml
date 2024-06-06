@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.cursoaristi.myapplication.ui.dashboard.AlertasFragment"
+        android:name="com.example.srodenas.example_with_catalogs.ui.views.fragments.alertas.AlertasFragment"
         tools:layout="@layout/fragment_alertas" />
 
     <fragment

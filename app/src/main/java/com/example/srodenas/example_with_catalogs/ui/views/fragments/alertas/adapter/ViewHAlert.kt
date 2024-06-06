@@ -10,7 +10,8 @@ import com.example.srodenas.example_with_catalogs.domain.alerts.models.Alert
 class ViewHAlert(
     view: View,
     val onDelete: (Int) -> Unit,
-    val onDetails: (Int) -> Unit
+    val onDetails: (Int) -> Unit,
+    val onEdit: (Alert, Int) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
     private val binding: ItemAlertBinding = ItemAlertBinding.bind(view)
@@ -28,6 +29,10 @@ class ViewHAlert(
 
             btnDescriptionAlert.setOnClickListener {
                 onDetails(position)
+            }
+
+            btnEditAlert.setOnClickListener {
+                onEdit(alert, position)
             }
         }
     }
