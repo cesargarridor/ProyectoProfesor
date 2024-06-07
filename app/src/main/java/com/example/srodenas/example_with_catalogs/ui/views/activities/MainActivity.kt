@@ -9,7 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.srodenas.example_with_catalogs.R
 import com.example.srodenas.example_with_catalogs.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+//a
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
