@@ -1,17 +1,17 @@
 package com.example.srodenas.example_with_catalogs.domain.users.models
 
-import com.example.srodenas.example_with_catalogs.data.users.database.dao.UserDao
-import com.example.srodenas.example_with_catalogs.data.users.database.entities.UserEntity
-import com.example.srodenas.example_with_catalogs.domain.users.UserDataBaseSingleton
 
+import com.example.srodenas.example_with_catalogs.domain.users.RetrofitClient
+import com.example.srodenas.example_with_catalogs.domain.users.UserService
 
-class Repository  private constructor(private val userDao : UserDao){
-    companion object{
+class Repository private constructor() {
+    private val userService: UserService = RetrofitClient.instance.create(UserService::class.java)
+
+    companion object {
         val repo: Repository by lazy {
-            Repository(UserDataBaseSingleton.userDao)
+            Repository()
         }
     }
-    val repo = this
 
     private var loggedUser: User? = null
 
@@ -22,28 +22,27 @@ class Repository  private constructor(private val userDao : UserDao){
     fun getLoggedUser(): User? {
         return loggedUser
     }
-    suspend fun isLoginEntity(email: String, passord: String): User?{
-        val posUser : UserEntity = userDao.login(email, passord)
-        var user : User ? = null
-        if (posUser != null)
-            user= User(posUser.id, posUser.name, posUser.password, posUser.email, posUser.phone, posUser.imag )
-        return user
+
+    suspend fun isLoginEntity(email: String, password: String): User? {
+        val response = userService.loginUser(email, password)
+        return if (response.isSuccessful) {
+            response.body()
+        } else {
+            null
+        }
     }
 
-
-
-    suspend fun registerEntity(user: User): Boolean{
-
-        val exitUser = isLoginEntity(user.email, user.passw)
-        if (exitUser == null){
-            val userEntity = UserEntity(user.id, user.name, user.email, user.passw, user.phone, user.imagen)
-            userDao.insertUser(userEntity)
-            return true
-        }else
-            return false
-
+    suspend fun registerEntity(user: User): Boolean {
+        val response = userService.registerUser(user)
+        return response.isSuccessful && response.body() == true
     }
-    suspend fun getAllUsers(): List<UserEntity> {
-        return userDao.getAllUsers()
+
+    suspend fun getAllUsers(): List<User> {
+        val response = userService.getAllUsers()
+        return if (response.isSuccessful) {
+            response.body() ?: emptyList()
+        } else {
+            emptyList()
+        }
     }
 }

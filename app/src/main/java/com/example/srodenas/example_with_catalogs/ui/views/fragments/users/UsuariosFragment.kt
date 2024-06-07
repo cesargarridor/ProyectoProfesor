@@ -12,7 +12,6 @@ import com.example.srodenas.example_with_catalogs.ui.viewmodel.users.UserViewMod
 import com.example.srodenas.example_with_catalogs.ui.views.fragments.users.adapter.AdapterUser
 
 class UsuariosFragment : Fragment() {
-
     private var _binding: FragmentUsuariosBinding? = null
     private val binding get() = _binding!!
 
